@@ -2,16 +2,16 @@ import { useRouter } from 'next/router';
 // import Header from '@/components/common/header';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { MainLayout } from '@/components/layouts';
+import { AdminLayout, MainLayout } from '@/components/layouts';
+import { Box, Typography } from '@mui/material';
 
-const Header = dynamic(() => import('@/components/common/header'), { ssr: false });
 export interface AboutPageProps {}
 
 export default function AboutPage(props: AboutPageProps) {
   const router = useRouter();
   const [postList, setPostList] = useState([]);
   const page = router.query?.page;
-  console.log(router.query);
+
   function handleNextClick() {
     router.push(
       {
@@ -33,21 +33,19 @@ export default function AboutPage(props: AboutPageProps) {
     })();
   }, [page]);
   return (
-    <MainLayout>
-      <div>About Page</div>
-      <Header />
+    <Box>
+      <Typography component='h1' variant='h3' color='primary.main'>
+        About Page
+      </Typography>
+
       <ul>
         {postList.map((post: any) => (
           <li key={post.id}>{post.title}</li>
         ))}
       </ul>
       <button onClick={handleNextClick}>Next Page</button>
-    </MainLayout>
+    </Box>
   );
 }
 
-// export async function getServerSideProps() {
-//   return {
-//     props: {},
-//   };
-// }
+AboutPage.Layout = AdminLayout;

@@ -1,13 +1,13 @@
 import { LayoutProps } from '@/models/index';
-import Link from 'next/link';
+import { Box, Container, Stack } from '@mui/system';
+import { Footer, Header } from '../common';
 
-export function MainLayout(props: LayoutProps) {
+export function MainLayout({ children }: LayoutProps) {
   return (
-    <div>
-      <h1>Main Layout</h1>
-      <Link href='/'>Home</Link>
-      <Link href='/about'>About</Link>
-      <div>{props.children}</div>
-    </div>
+    <Stack minHeight='100vh'>
+      <Header />
+      <Box flexGrow={1}>{children}</Box>
+      <Footer />
+    </Stack>
   );
 }
